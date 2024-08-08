@@ -8,8 +8,9 @@ export async function POST(request: Request) {
 	try {
 		let authorization
 		const headers = request.headers
+		console.log("headers", headers)
 		headers.forEach((value, name) => {
-			if (name === "authorization") authorization = value
+			if (name.toLocaleLowerCase() === "authorization") authorization = value
 		})
 		console.log("authorization", authorization)
 		console.log("process.env.API_ENPOINT_KEY", process.env.API_ENPOINT_KEY)
