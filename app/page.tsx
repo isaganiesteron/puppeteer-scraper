@@ -23,7 +23,7 @@ export default function Home() {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: "b7070824-06c6-455a-9ae3-ddc5ac51f222",
+				Authorization: `${process.env.NEXT_PUBLIC_API_KEY}`,
 			},
 			body: JSON.stringify(userdata),
 		}).then((x) => x.json())
@@ -41,7 +41,7 @@ export default function Home() {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: "b7070824-06c6-455a-9ae3-ddc5ac51f222",
+				Authorization: `${process.env.NEXT_PUBLIC_API_KEY}`,
 			},
 		}).then((x) => x.json())
 		console.log(res)
