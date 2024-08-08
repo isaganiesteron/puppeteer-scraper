@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer-core';
 import { executablePath } from 'puppeteer';
-// import chromium from '@sparticuz/chromium-min';
+import chromium from '@sparticuz/chromium-min';
 
 async function fetchData() {
   try {
@@ -13,25 +13,25 @@ async function fetchData() {
     // });
     // ***only for local testing***
 
-    // const onLocal = process.env.ON_LOCAL === 'true' || false;
+    const onLocal = process.env.ON_LOCAL === 'true' || false;
 
     // ***only for local testing***
     let browserOptions: object = {
       executablePath: executablePath(),
     };
 
-    // if (!onLocal) {
-    //   browserOptions = {
-    //     args: chromium.args,
-    //     defaultViewport: chromium.defaultViewport,
-    //     // executablePath: await chromium.executablePath(),
-    //     executablePath: await chromium.executablePath(
-    //       `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`
-    //     ),
-    //     headless: chromium.headless,
-    //     ignoreHTTPSErrors: true,
-    //   };
-    // }
+    if (!onLocal) {
+      browserOptions = {
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath(),
+        // executablePath: await chromium.executablePath(
+        //   `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`
+        // ),
+        headless: chromium.headless,
+        ignoreHTTPSErrors: true,
+      };
+    }
 
     const browser = await puppeteer.launch(browserOptions);
     const page = await browser.newPage();
