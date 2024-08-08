@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Puppeteer Scraper
 
-## Getting Started
+Puppeteer Scraper is a Node.js application that uses the Puppeteer headless browser to scrape hotel prices from the Expedia website. The application also connects to a PostgreSQL database to fetch Expedia cookies, ensuring an authenticated and reliable scraping process.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Packages Used](#packages-used)
+- [Database](#database)
+- [Contributing](#contributing)
+- [License](#license)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Headless Scraping: Utilizes Puppeteer to perform headless browsing and extract hotel prices from Expedia.
+Database Integration: Connects to a PostgreSQL database to fetch and utilize Expedia cookies for authenticated sessions.
+HTML Parsing: Uses Cheerio for efficient HTML parsing and data extraction.
+Efficient & Scalable: Designed to handle multiple requests and scale as needed.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Installation:
 
-## Learn More
+To get started with Puppeteer Scraper, follow these steps:
 
-To learn more about Next.js, take a look at the following resources:
+Clone the repository:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Copy code
+git clone https://github.com/yourusername/puppeteer-scraper.git
+cd puppeteer-scraper
+Install dependencies:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Copy code
+npm install
+Set up PostgreSQL:
 
-## Deploy on Vercel
+Ensure you have a running PostgreSQL database.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Create a .env file in the root directory and add your PostgreSQL connection string:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Usage:
+
+The Puppeteer Scraper can be run using a simple command:
+
+Copy code
+npm run scrape
+This command will launch the Puppeteer headless browser, navigate to Expedia, and scrape hotel prices based on the criteria defined in the script. The cookies fetched from the PostgreSQL database ensure the session remains authenticated.
+
+Packages Used:
+
+The following packages are used in this application:
+
+puppeteer: Provides the headless browser for scraping.
+puppeteer-core: A lighter version of Puppeteer that is used in environments where full Puppeteer installation is not needed.
+@vercel/postgres: Simplifies database connection and query execution.
+cheerio: Parses and manipulates the scraped HTML content.
+Database:
+
+Puppeteer Scraper uses a PostgreSQL database to store and retrieve cookies needed for authenticating the scraping sessions. Ensure your database is set up correctly and the connection string is provided in the .env file.
+
+License:
+
+This project is licensed under the MIT License. See the LICENSE file for details.
