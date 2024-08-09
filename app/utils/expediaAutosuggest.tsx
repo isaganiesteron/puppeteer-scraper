@@ -1,6 +1,4 @@
 import puppeteer from "puppeteer-core"
-// import { executablePath } from "puppeteer"
-// import chromium from "@sparticuz/chromium-min"
 
 const expediaAutosuggest = async (hotelName: string, expediaCookie: string) => {
 	try {
@@ -39,19 +37,11 @@ const expediaAutosuggest = async (hotelName: string, expediaCookie: string) => {
 
 		// ***only for local testing***
 		let browserOptions: object = {
-			// executablePath: executablePath(),
 			executablePath: `C:/Program Files (x86)/Google/Chrome/Application/chrome.exe`,
 		}
 
 		if (!onLocal) {
 			browserOptions = {
-				// args: chromium.args,
-				// defaultViewport: chromium.defaultViewport,
-				// executablePath: await chromium.executablePath(),
-				// // executablePath: await chromium.executablePath(
-				// //   `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`
-				// // ),
-				// headless: chromium.headless,
 				args: ["--no-sandbox"],
 				executablePath: "/usr/bin/google-chrome",
 				ignoreHTTPSErrors: true,
@@ -68,7 +58,7 @@ const expediaAutosuggest = async (hotelName: string, expediaCookie: string) => {
 			cookie: expediaCookie,
 		})
 		await page.goto(urlString, {
-			timeout: 20 * 1000,
+			timeout: 40 * 1000,
 			waitUntil: ["domcontentloaded"],
 		})
 		const innerText = await page.evaluate(() => document.querySelector("body")?.innerText)

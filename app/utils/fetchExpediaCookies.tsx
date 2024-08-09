@@ -1,6 +1,4 @@
 import puppeteer from "puppeteer-core"
-// import { executablePath } from "puppeteer"
-// import chromium from "@sparticuz/chromium-min"
 
 async function fetchData() {
 	try {
@@ -23,13 +21,6 @@ async function fetchData() {
 
 		if (!onLocal) {
 			browserOptions = {
-				// args: chromium.args,
-				// defaultViewport: chromium.defaultViewport,
-				// executablePath: await chromium.executablePath(),
-				// // executablePath: await chromium.executablePath(
-				// //   `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`
-				// // ),
-				// headless: chromium.headless,
 				args: ["--no-sandbox"],
 				executablePath: "/usr/bin/google-chrome",
 				ignoreHTTPSErrors: true,
@@ -39,7 +30,7 @@ async function fetchData() {
 		const browser = await puppeteer.launch(browserOptions)
 		const page = await browser.newPage()
 		await page.goto("https://www.expedia.com/", {
-			timeout: 20 * 1000,
+			timeout: 40 * 1000,
 			waitUntil: ["domcontentloaded"],
 		})
 		const cookies = await page.cookies()

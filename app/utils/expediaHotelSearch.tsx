@@ -1,7 +1,6 @@
 import puppeteer from "puppeteer-core"
-// import { executablePath } from "puppeteer"
-// import chromium from "@sparticuz/chromium-min"
 import cheerio from "cheerio"
+import fs from "fs"
 
 const expediaHotelSearch = async (hotelId: string, hotelName: string, latLong: string, guests: string, startDate: string, endDate: string, expediaCookie: string) => {
 	try {
@@ -51,19 +50,11 @@ const expediaHotelSearch = async (hotelId: string, hotelName: string, latLong: s
 
 		// ***only for local testing***
 		let browserOptions: object = {
-			// executablePath: executablePath(),
 			executablePath: `C:/Program Files (x86)/Google/Chrome/Application/chrome.exe`,
 		}
 
 		if (!onLocal) {
 			browserOptions = {
-				// args: chromium.args,
-				// defaultViewport: chromium.defaultViewport,
-				// executablePath: await chromium.executablePath(),
-				// // executablePath: await chromium.executablePath(
-				// //   `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`
-				// // ),
-				// headless: chromium.headless,
 				args: ["--no-sandbox"],
 				executablePath: "/usr/bin/google-chrome",
 				ignoreHTTPSErrors: true,
@@ -80,11 +71,16 @@ const expediaHotelSearch = async (hotelId: string, hotelName: string, latLong: s
 		})
 		// Navigate the page to a URL.
 		await page.goto(url, {
-			timeout: 20 * 1000,
+			timeout: 40 * 1000,
 			waitUntil: ["domcontentloaded"],
 		})
 		// Extract only element with the listing-results
 		// NOTE: if reached the maximum searches with not logged in account you would get ""
+		const allHtml = await page.evaluate(() => document.querySelector("*")?.outerHTML)
+		console.log("******allHtml******")
+
+		const fileName = `./logs/allhtml-${new Date().toISOString().replace(/:/g, "-")}.txt`
+		fs.writeFileSync(fileName, allHtml || "")
 		const htmlData = await page.evaluate(() => document.querySelector('div[data-stid="property-listing-results"]')?.outerHTML)
 		await browser.close()
 
