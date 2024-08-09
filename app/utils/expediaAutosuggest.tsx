@@ -1,5 +1,5 @@
 import puppeteer from "puppeteer-core"
-import { executablePath } from "puppeteer"
+// import { executablePath } from "puppeteer"
 // import chromium from "@sparticuz/chromium-min"
 
 const expediaAutosuggest = async (hotelName: string, expediaCookie: string) => {
@@ -39,15 +39,12 @@ const expediaAutosuggest = async (hotelName: string, expediaCookie: string) => {
 
 		// ***only for local testing***
 		let browserOptions: object = {
-			executablePath: executablePath(),
+			// executablePath: executablePath(),
+			executablePath: `C:/Program Files (x86)/Google/Chrome/Application/chrome.exe`,
 		}
 
 		if (!onLocal) {
 			browserOptions = {
-				args: ["--no-sandbox"],
-				defaultViewport: null,
-				headless: true,
-				ignoreHTTPSErrors: true,
 				// args: chromium.args,
 				// defaultViewport: chromium.defaultViewport,
 				// executablePath: await chromium.executablePath(),
@@ -55,7 +52,8 @@ const expediaAutosuggest = async (hotelName: string, expediaCookie: string) => {
 				// //   `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`
 				// // ),
 				// headless: chromium.headless,
-				// ignoreHTTPSErrors: true,
+				executablePath: "/usr/bin/google-chrome",
+				ignoreHTTPSErrors: true,
 			}
 		}
 
