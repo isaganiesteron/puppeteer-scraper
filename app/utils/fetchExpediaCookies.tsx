@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer-core"
 import { executablePath } from "puppeteer"
-import chromium from "@sparticuz/chromium-min"
+// import chromium from "@sparticuz/chromium-min"
 
 async function fetchData() {
 	try {
@@ -22,14 +22,18 @@ async function fetchData() {
 
 		if (!onLocal) {
 			browserOptions = {
-				args: chromium.args,
-				defaultViewport: chromium.defaultViewport,
-				executablePath: await chromium.executablePath(),
-				// executablePath: await chromium.executablePath(
-				//   `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`
-				// ),
-				headless: chromium.headless,
+				args: ["--no-sandbox"],
+				defaultViewport: null,
+				headless: true,
 				ignoreHTTPSErrors: true,
+				// args: chromium.args,
+				// defaultViewport: chromium.defaultViewport,
+				// executablePath: await chromium.executablePath(),
+				// // executablePath: await chromium.executablePath(
+				// //   `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`
+				// // ),
+				// headless: chromium.headless,
+				// ignoreHTTPSErrors: true,
 			}
 		}
 

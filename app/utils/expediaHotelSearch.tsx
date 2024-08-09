@@ -1,7 +1,7 @@
+import cheerio from "cheerio"
 import puppeteer from "puppeteer-core"
 import { executablePath } from "puppeteer"
-import chromium from "@sparticuz/chromium-min"
-import cheerio from "cheerio"
+// import chromium from "@sparticuz/chromium-min"
 
 const expediaHotelSearch = async (hotelId: string, hotelName: string, latLong: string, guests: string, startDate: string, endDate: string, expediaCookie: string) => {
 	try {
@@ -56,14 +56,18 @@ const expediaHotelSearch = async (hotelId: string, hotelName: string, latLong: s
 
 		if (!onLocal) {
 			browserOptions = {
-				args: chromium.args,
-				defaultViewport: chromium.defaultViewport,
-				executablePath: await chromium.executablePath(),
-				// executablePath: await chromium.executablePath(
-				//   `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`
-				// ),
-				headless: chromium.headless,
+				args: ["--no-sandbox"],
+				defaultViewport: null,
+				headless: true,
 				ignoreHTTPSErrors: true,
+				// args: chromium.args,
+				// defaultViewport: chromium.defaultViewport,
+				// executablePath: await chromium.executablePath(),
+				// // executablePath: await chromium.executablePath(
+				// //   `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`
+				// // ),
+				// headless: chromium.headless,
+				// ignoreHTTPSErrors: true,
 			}
 		}
 
