@@ -76,11 +76,7 @@ const expediaHotelSearch = async (hotelId: string, hotelName: string, latLong: s
 		})
 		// Extract only element with the listing-results
 		// NOTE: if reached the maximum searches with not logged in account you would get ""
-		const allHtml = await page.evaluate(() => document.querySelector("*")?.outerHTML)
-		console.log("******allHtml******")
 
-		const fileName = `./logs/allhtml-${new Date().toISOString().replace(/:/g, "-")}.txt`
-		fs.writeFileSync(fileName, allHtml || "")
 		const htmlData = await page.evaluate(() => document.querySelector('div[data-stid="property-listing-results"]')?.outerHTML)
 		await browser.close()
 
@@ -115,8 +111,10 @@ const expediaHotelSearch = async (hotelId: string, hotelName: string, latLong: s
 		if (targetHotel) return targetHotel
 		return { message: "No Match Found", alternatives: allHotels }
 	} catch (error: any) {
-		console.log("error")
-		console.log(error)
+		const currentDate = new Date().toLocaleString().replace(/[/, :]/g, "-")
+		const formattedDate = currentDate.replace(/, /g, "-")
+		const fileName = `./logs/${formattedDate}.txt`
+		fs.writeFileSync(fileName, error.toString())
 		return { message: error.message, error: error as Error }
 	}
 }

@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer-core"
+import fs from "fs"
 
 async function fetchData() {
 	try {
@@ -46,6 +47,10 @@ async function fetchData() {
 		return cookiesString
 	} catch (error: any) {
 		console.log("ERR: ", error.message)
+		const currentDate = new Date().toLocaleString().replace(/[/, :]/g, "-")
+		const formattedDate = currentDate.replace(/, /g, "-")
+		const fileName = `./logs/${formattedDate}.txt`
+		fs.writeFileSync(fileName, error.toString())
 		return null
 	}
 }

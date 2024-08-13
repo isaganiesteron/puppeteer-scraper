@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer-core"
+import fs from "fs"
 
 const expediaAutosuggest = async (hotelName: string, expediaCookie: string) => {
 	try {
@@ -83,9 +84,13 @@ const expediaAutosuggest = async (hotelName: string, expediaCookie: string) => {
 		const returnObj = { id, name, latlong }
 		console.log("successfully fetched hotel's full name: ", returnObj)
 		return returnObj
-	} catch (error) {
+	} catch (error: any) {
 		console.log("error")
 		console.log(error)
+		const currentDate = new Date().toLocaleString().replace(/[/, :]/g, "-")
+		const formattedDate = currentDate.replace(/, /g, "-")
+		const fileName = `./logs/${formattedDate}.txt`
+		fs.writeFileSync(fileName, error.toString())
 		return false
 	}
 }
